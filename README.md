@@ -5,7 +5,7 @@
 ### This is a Python program for dealing Mythic Cards in singleplayer, or local multiplayer
 
 # Current Version
-3.0.0
+[3.0.0](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/releases/tag/v3.0.0)
 
 # To Use
 You will need Python installed on your computer.
