@@ -26,6 +26,9 @@ You won't need the Shuffle Card, since this program automatically shuffles the c
 
 All of the cards (original and flipped) must be in the same folder.
 
+# Tutorial
+![Picture of Program](https://i.imgur.com/Ihv1jIq.png)
+
 Run the Python program. At the top of the window, there is a button to Load Cards. Select the folder where you have your digital card deck located. The program will display which folder is loaded, and how many .png images it located in the folder. This folder will be saved when you exit the program and will reload automatically the next time you open it.
 
 You can click "Load Fate Chart" to load the image titled FateChart.png which needs to be contained in the same folder as the Mythic RPG Card Dealer.py program.
