@@ -1,11 +1,11 @@
 # RPG_Card_Dealer_for_Mythic
- 
+
 ![Made For Mythic Cards](https://i.imgur.com/1F5m5My.png) ![Made Of Python](https://i.imgur.com/xNcFIbg.png)
 
-### This is a Python program for dealing Mythic Cards, either singleplayer, or local multiplayer
+### This is a Python program for dealing Mythic Cards in singleplayer, or local multiplayer
 
 # Current Version
-[3.0.0](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/releases/tag/v3.0.0)
+3.0.0
 
 # To Use
 You will need Python installed on your computer.
@@ -26,7 +26,6 @@ You won't need the Shuffle Card, since this program automatically shuffles the c
 
 All of the cards (original and flipped) must be in the same folder.
 
-# Tutorial
 Run the Python program. At the top of the window, there is a button to Load Cards. Select the folder where you have your digital card deck located. The program will display which folder is loaded, and how many .png images it located in the folder. This folder will be saved when you exit the program and will reload automatically the next time you open it.
 
 You can click "Load Fate Chart" to load the image titled FateChart.png which needs to be contained in the same folder as the Mythic RPG Card Dealer.py program.
@@ -45,11 +44,11 @@ The Save button at the top of the window will save all the information currently
 
 When you reopen the program, it will start out blank, but you can click Load to reload your save file and continue your game. You can only have one save file in the program directory at a time. Multiple saves not supported yet.
 
+# Support Always Appreciated
+<a href="https://www.buymeacoffee.com/exarobibliologist" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 # Known Bugs
 None so far. [Please report any bugs here](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/issues)
-
-# Suggestions
-[Please leave your ideas and suggestions here.](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/discussions/1)
 
 # Plans For The Future
 * Make the app flip the cards itself during the display process which will simplify the setup process.
