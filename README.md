@@ -48,6 +48,9 @@ When you reopen the program, it will start out blank, but you can click Load to 
 # Known Bugs
 None so far. [Please report any bugs here](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/issues)
 
+# Suggestions
+[Please leave your ideas and suggestions here.](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/discussions/1)
+
 # Plans For The Future
 * Make the app flip the cards itself during the display process which will simplify the setup process.
 * Allow multiple save files to be created. Redesign Load to allow you choose a file to be loaded.
