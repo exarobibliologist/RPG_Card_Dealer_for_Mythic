@@ -7,6 +7,9 @@
 # Current Version
 [3.0.0](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/releases/tag/v3.0.0)
 
+# Support Always Appreciated
+<a href="https://www.buymeacoffee.com/exarobibliologist" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 # To Use
 You will need Python installed on your computer.
 
@@ -47,8 +50,9 @@ The Save button at the top of the window will save all the information currently
 
 When you reopen the program, it will start out blank, but you can click Load to reload your save file and continue your game. You can only have one save file in the program directory at a time. Multiple saves not supported yet.
 
-# Support Always Appreciated
-<a href="https://www.buymeacoffee.com/exarobibliologist" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+Here's an example of the program in use from a recent game I played.
+
+![](https://i.imgur.com/wqG6x9Y.png)
 
 # Known Bugs
 None so far. [Please report any bugs here](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/issues)
