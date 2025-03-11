@@ -58,5 +58,5 @@ Here's an example of the program in use from a recent game I played.
 None so far. [Please report any bugs here](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/issues)
 
 # Plans For The Future
-* Make the app flip the cards itself during the display process which will simplify the setup process. (Currently in BETA. Will be released soon.)
+* Make the app flip the cards itself during the display process which will simplify the setup process. *(Currently in BETA. Will be released soon.)*
 * Allow multiple save files to be created. Redesign Load to allow you choose a file to be loaded.
