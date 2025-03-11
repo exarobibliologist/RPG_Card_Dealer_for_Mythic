@@ -4,8 +4,8 @@
 
 ### This is a Python program for dealing Mythic Cards in singleplayer, or local multiplayer
 
-# Current Version
-[3.0.0](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/releases/tag/v3.0.0)
+# Beta Version
+[4.0.0](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/tree/beta)
 
 # Support Always Appreciated
 <a href="https://www.buymeacoffee.com/exarobibliologist" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
