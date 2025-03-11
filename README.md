@@ -25,9 +25,7 @@ pip install pillow
 
 You will need to have a downloaded copy of Mythic Cards RPG game. In the download, there is a folder filled with "Individual Card Images" in the .png format.
 
-You won't need the Shuffle Card, since this program automatically shuffles the cards on every deal. You also will not need the backs of the cards. Select the card fronts, and copy them to a new folder. Use your preferred image editor to flip the cards 180°, save them with a different file name so they don't overwrite the original files, then put them back in the original folder.
-
-All of the cards (original and flipped) must be in the same folder.
+You won't need the Shuffle Card, since this program automatically shuffles the cards on every deal. You also will not need the backs of the cards. Select the card fronts, and copy them to a new folder. As of v4.0.0, there is no need to flip the cards yourself anymore. The program should flip the cards randomly during the draw.
 
 # Tutorial
 ![Picture of Program](https://i.imgur.com/Ihv1jIq.png)
