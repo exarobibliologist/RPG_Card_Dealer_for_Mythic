@@ -56,17 +56,21 @@ def deal_cards(num_cards=None):
     selected_cards = card_images[:num_cards]
     show_cards(selected_cards)
 
-# Display cards in a new window
 def show_cards(selected_cards):
     card_window = tk.Toplevel(root)
     card_window.title("Dealt Cards")
-    
+
     num_cards = len(selected_cards)
     columns = 5 if num_cards > 5 else num_cards
     rows = (num_cards // 5) + (1 if num_cards % 5 else 0)
-    
+
     for idx, card in enumerate(selected_cards):
         img = Image.open(card).resize((250, 350))
+        
+        # Randomly rotate some cards by 180 degrees
+        if random.choice([True, False]):
+            img = img.rotate(180)
+        
         photo = ImageTk.PhotoImage(img)
         label = tk.Label(card_window, image=photo)
         label.image = photo
