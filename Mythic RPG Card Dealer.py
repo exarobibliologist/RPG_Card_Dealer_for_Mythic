@@ -133,7 +133,7 @@ card_images = load_images(last_folder) if last_folder else []
 
 # GUI Setup
 root = tk.Tk()
-root.title("RPG Card Dealer")
+root.title("Mythic Cards RPG Dealer v4.0.0-beta")
 root.geometry("700x900")
 
 # Save and Load buttons
