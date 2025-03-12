@@ -55,7 +55,8 @@ Here's an example of the program in use from a recent game I played.
 ![](https://i.imgur.com/wqG6x9Y.png)
 
 # Known Bugs
-None so far. [Please report any bugs here](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/issues)
+None in v3.0.0
+1 reported bug in v4.0.0-beta [Please report any bugs here](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/issues)
 
 # Plans For The Future
 * Make the app flip the cards itself during the display process. *(Currently in BETA) (Release Date: SOON!)*
