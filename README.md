@@ -56,6 +56,7 @@ Here's an example of the program in use from a recent game I played.
 
 # Known Bugs
 None in v3.0.0
+
 1 reported bug in v4.0.0-beta [Please report any bugs here](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/issues)
 
 # Plans For The Future
