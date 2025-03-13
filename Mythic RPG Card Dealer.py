@@ -10,6 +10,13 @@ SAVE_FILE = os.path.join(SCRIPT_DIR, "last_folder.txt")  # File to store the las
 DATA_FILE = os.path.join(SCRIPT_DIR, "saved_data.txt")  # File to store text box contents
 FATE_CHART_FILE = os.path.join(SCRIPT_DIR, "FateChart.png")  # Path to FateChart.png
 
+# Function to clear all text boxes and reset the Chaos Factor slider
+def new_game():
+    threads_list.delete("1.0", tk.END)
+    characters_list.delete("1.0", tk.END)
+    storyline_box.delete("1.0", tk.END)
+    chaos_slider.set(5)  # Reset Chaos Factor to default (middle value)
+
 # Load the last used folder path
 def load_last_folder():
     if os.path.exists(SAVE_FILE):
@@ -56,7 +63,7 @@ def deal_cards(num_cards=None):
     selected_cards = card_images[:num_cards]
     show_cards(selected_cards)
 
-def show_cards(selected_cards):
+def show_cards(selected_cards, force_upright=False):
     card_window = tk.Toplevel(root)
     card_window.title("Dealt Cards")
 
@@ -67,8 +74,8 @@ def show_cards(selected_cards):
     for idx, card in enumerate(selected_cards):
         img = Image.open(card).resize((250, 350))
         
-        # Randomly rotate some cards by 180 degrees
-        if random.choice([True, False]):
+        # Randomly rotate only if force_upright is False
+        if not force_upright and random.choice([True, False]):
             img = img.rotate(180)
         
         photo = ImageTk.PhotoImage(img)
@@ -120,25 +127,29 @@ def load_data():
         except ValueError:
             pass
 
-# # Function to show the Fate Chart
+# Update the show_fate_chart function to pass force_upright=True
 def show_fate_chart():
     if not os.path.exists(FATE_CHART_FILE):
         result_label.config(text="FateChart.png not found in the application folder.")
         return
     
-    show_cards([FATE_CHART_FILE])
-
+    show_cards([FATE_CHART_FILE], force_upright=True)
+    
 last_folder = load_last_folder()
 card_images = load_images(last_folder) if last_folder else []
 
 # GUI Setup
 root = tk.Tk()
-root.title("Mythic Cards RPG Dealer v4.0.0-beta")
+root.title("Card Dealer for Mythic Cards v4.1.1-beta")
 root.geometry("700x900")
 
 # Save and Load buttons
 top_frame = tk.Frame(root)
 top_frame.pack()
+
+# Add "New" button next to Save and Load
+new_button = tk.Button(top_frame, text="New", command=new_game)
+new_button.pack(side=tk.LEFT, padx=5, pady=5)
 
 save_button = tk.Button(top_frame, text="Save", command=save_data)
 save_button.pack(side=tk.LEFT, padx=5, pady=5)
