@@ -5,7 +5,7 @@
 ### This is a Python program for dealing Mythic Cards in singleplayer, or local multiplayer
 
 # Beta Version
-[4.0.0](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/tree/beta)
+[4.1.1-beta](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/tree/beta)
 
 # Support Always Appreciated
 <a href="https://www.buymeacoffee.com/exarobibliologist" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
@@ -28,13 +28,19 @@ You will need to have a downloaded copy of Mythic Cards RPG game. In the downloa
 You won't need the Shuffle Card, since this program automatically shuffles the cards on every deal. You also will not need the backs of the cards. Select the card fronts, and copy them to a new folder. As of v4.0.0, there is no need to flip the cards yourself anymore. The program should flip the cards randomly during the draw.
 
 # Tutorial
-![Picture of Program](https://i.imgur.com/Ihv1jIq.png)
+![Picture of Program](https://i.imgur.com/hn6ZHWX.png)
 
-Run the Python program. At the top of the window, there is a button to Load Cards. Select the folder where you have your digital card deck located. The program will display which folder is loaded, and how many .png images it located in the folder. This folder will be saved when you exit the program and will reload automatically the next time you open it.
+Run the Python program.
 
-You can click "Load Fate Chart" to load the image titled FateChart.png which needs to be contained in the same folder as the Mythic RPG Card Dealer.py program.
+At the top of the window, click "New" to begin a new game; click "Save" to save a current game; click "Load" to load your last saved game.
 
-You can use the Quick Deal buttons to quickly deal up to 10 cards. Alternatively, you can enter the number of cards you need dealt, and click the "Deal Cards" button below.
+"Select Card Folder" allows you to choose the folder where you have saved your deck of Mythic Cards. The program will display which folder is loaded, and how many card images it located in the folder. This folder will be saved when you exit the program and will reload automatically the next time you open it.
+
+You can click "Show Fate Chart" to load the image titled FateChart.png which needs to be contained in the same folder as the Mythic RPG Card Dealer.py program.
+
+The Quickly Draw Cards row of buttons allows you to quickly deal up any number of cards up to 10.
+
+If you need to deal more than 10, type the number in the box below and click "Deal Cards".
 
 The Threads List is where you can write the list of threads your game has. Some of the cards will require you to build on one of those threads, and the "Select Random Threads List" will randomly pick one of your open threads and highlight it.
 
@@ -50,11 +56,11 @@ When you reopen the program, it will start out blank, but you can click Load to 
 
 Here's an example of the program in use from a recent game I played.
 
-![](https://i.imgur.com/wqG6x9Y.png)
+![](https://i.imgur.com/ye1NQoA.png)
 
 # Known Bugs
 None so far. [Please report any bugs here](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/issues)
 
 # Plans For The Future
-* Make the app flip the cards itself during the display process. *(Currently in BETA) (Release Date: SOON!)*
+* Make the app flip the cards itself during the display process. *(Status: Complete!) (Version 4.1.1-beta contains this function)*
 * Allow multiple save files to be created. Redesign Load to allow you choose a file to be loaded.
