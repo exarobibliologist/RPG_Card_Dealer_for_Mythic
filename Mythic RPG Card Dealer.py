@@ -1,7 +1,7 @@
 import os
 import random
 import tkinter as tk
-from tkinter import filedialog, scrolledtext, Canvas, Scrollbar
+from tkinter import filedialog, scrolledtext, Canvas, Scrollbar, filedialog
 from PIL import Image, ImageTk
 
 # Get the script directory
@@ -96,37 +96,45 @@ def select_random_entry(text_box):
                 root.after(60000, lambda: text_box.tag_remove("highlight", "1.0", tk.END))  # Remove highlight after 1 minute
                 break
 
-# Function to save data to a file
+# Function to save data to a user-selected file
 def save_data():
-    with open(DATA_FILE, "w") as f:
+    file_path = filedialog.asksaveasfilename(defaultextension=".txt",
+                                             filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")])
+    if not file_path:
+        return  # User canceled
+
+    with open(file_path, "w") as f:
         f.write("Threads List:\n" + threads_list.get("1.0", tk.END))
         f.write("Characters List:\n" + characters_list.get("1.0", tk.END))
         f.write("Chaos Factor:\n" + str(chaos_slider.get()) + "\n")
         f.write("Storyline:\n" + storyline_box.get("1.0", tk.END))
 
-# Function to load data from a file
+# Function to load data from a user-selected file
 def load_data():
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, "r") as f:
-            data = f.read().split("\n")
-            
-        try:
-            threads_list.delete("1.0", tk.END)
-            characters_list.delete("1.0", tk.END)
-            storyline_box.delete("1.0", tk.END)
-            
-            threads_index = data.index("Threads List:") + 1
-            characters_index = data.index("Characters List:") + 1
-            chaos_index = data.index("Chaos Factor:") + 1
-            storyline_index = data.index("Storyline:") + 1
-            
-            threads_list.insert("1.0", "\n".join(data[threads_index:characters_index-1]))
-            characters_list.insert("1.0", "\n".join(data[characters_index:chaos_index-1]))
-            chaos_slider.set(int(data[chaos_index]))
-            storyline_box.insert("1.0", "\n".join(data[storyline_index:]))
-        except ValueError:
-            pass
+    file_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")])
+    if not file_path:
+        return  # User canceled
 
+    with open(file_path, "r") as f:
+        data = f.read().split("\n")
+
+    try:
+        threads_list.delete("1.0", tk.END)
+        characters_list.delete("1.0", tk.END)
+        storyline_box.delete("1.0", tk.END)
+
+        threads_index = data.index("Threads List:") + 1
+        characters_index = data.index("Characters List:") + 1
+        chaos_index = data.index("Chaos Factor:") + 1
+        storyline_index = data.index("Storyline:") + 1
+
+        threads_list.insert("1.0", "\n".join(data[threads_index:characters_index-1]))
+        characters_list.insert("1.0", "\n".join(data[characters_index:chaos_index-1]))
+        chaos_slider.set(int(data[chaos_index]))
+        storyline_box.insert("1.0", "\n".join(data[storyline_index:]))
+    except ValueError:
+        pass  # Handle cases where file format is incorrect
+        
 # Update the show_fate_chart function to pass force_upright=True
 def show_fate_chart():
     if not os.path.exists(FATE_CHART_FILE):
@@ -140,7 +148,7 @@ card_images = load_images(last_folder) if last_folder else []
 
 # GUI Setup
 root = tk.Tk()
-root.title("Card Dealer for Mythic Cards v4.1.1-beta")
+root.title("Card Dealer for Mythic Cards v4.2.1-beta")
 root.geometry("700x900")
 
 # Save and Load buttons
