@@ -4,8 +4,9 @@
 
 ### This is a Python program for dealing Mythic Cards in singleplayer, or local multiplayer
 
-# Beta Version
-[4.1.1-beta](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/tree/beta)
+# Beta Testing Version
+5.0.0-beta
+[If it breaks, please tell me where so I can find both pieces.](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/issues)
 
 # Support Always Appreciated
 <a href="https://www.buymeacoffee.com/exarobibliologist" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
@@ -57,10 +58,3 @@ When you reopen the program, it will start out blank, but you can click Load to 
 Here's an example of the program in use from a recent game I played.
 
 ![](https://i.imgur.com/ye1NQoA.png)
-
-# Known Bugs
-None so far. [Please report any bugs here](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/issues)
-
-# Plans For The Future
-* Make the app flip the cards itself during the display process. *(Status: Complete!) (Version 4.1.1-beta contains this function)*
-* Allow multiple save files to be created. Redesign Load to allow you choose a file to be loaded.
