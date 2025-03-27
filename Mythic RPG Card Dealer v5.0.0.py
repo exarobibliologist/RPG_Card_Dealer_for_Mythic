@@ -1,44 +1,31 @@
 import os
 import random
 import tkinter as tk
-from tkinter import filedialog, scrolledtext, Canvas, Scrollbar, filedialog
+from tkinter import filedialog, scrolledtext
 from PIL import Image, ImageTk
 
-# Get the script directory
+# Window Initialization
+root = tk.Tk()
+root.title("Mythic RPG Card Dealer v5.0.0")
+root.geometry("700x300")
+
+game_state_window = tk.Toplevel(root)
+game_state_window.title("Mythic Game Notes")
+game_state_window.geometry("600x600")
+
+# Paths and Save Logic
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-SAVE_FILE = os.path.join(SCRIPT_DIR, "last_folder.txt")  # File to store the last used folder
-DATA_FILE = os.path.join(SCRIPT_DIR, "saved_data.txt")  # File to store text box contents
-FATE_CHART_FILE = os.path.join(SCRIPT_DIR, "FateChart.png")  # Path to FateChart.png
-
-# Function to clear all text boxes and reset the Chaos Factor slider
-def new_game():
-    threads_list.delete("1.0", tk.END)
-    characters_list.delete("1.0", tk.END)
-    storyline_box.delete("1.0", tk.END)
-    chaos_slider.set(5)  # Reset Chaos Factor to default (middle value)
-
-# Load the last used folder path
-def load_last_folder():
-    if os.path.exists(SAVE_FILE):
-        with open(SAVE_FILE, "r") as f:
-            folder_path = f.read().strip()
-            return folder_path if os.path.isdir(folder_path) else None
-    return None
-
-def save_last_folder(folder_path):
-    with open(SAVE_FILE, "w") as f:
-        f.write(folder_path)
+FATE_CHART_FILE = os.path.join(SCRIPT_DIR, "FateChart.png")
 
 # Load images from a selected folder
 def load_images(folder_path):
     return [os.path.join(folder_path, file) for file in os.listdir(folder_path) if file.lower().endswith((".png", ".jpg", ".jpeg"))]
 
-# Select folder containing card images
+# Select and load card images
 def select_folder():
     global card_images
     folder_selected = filedialog.askdirectory()
     if folder_selected:
-        save_last_folder(folder_selected)
         card_images = load_images(folder_selected)
         result_label.config(text=f"Loaded {len(card_images)} cards from {folder_selected}." if card_images else "No images found.")
 
@@ -63,58 +50,45 @@ def deal_cards(num_cards=None):
     selected_cards = card_images[:num_cards]
     show_cards(selected_cards)
 
+# Show cards (randomly rotate some unless forced upright)
 def show_cards(selected_cards, force_upright=False):
     card_window = tk.Toplevel(root)
     card_window.title("Dealt Cards")
 
-    num_cards = len(selected_cards)
-    columns = 5 if num_cards > 5 else num_cards
-    rows = (num_cards // 5) + (1 if num_cards % 5 else 0)
-
-    for idx, card in enumerate(selected_cards):
+    for card in selected_cards:
         img = Image.open(card).resize((250, 350))
-        
-        # Randomly rotate only if force_upright is False
         if not force_upright and random.choice([True, False]):
             img = img.rotate(180)
-        
+
         photo = ImageTk.PhotoImage(img)
         label = tk.Label(card_window, image=photo)
         label.image = photo
-        label.grid(row=idx // columns, column=idx % columns, padx=10, pady=10)
-        
-# Function to randomly select an entry from a text box
-def select_random_entry(text_box):
-    lines = text_box.get("1.0", tk.END).strip().split("\n")
-    lines = [line for line in lines if line.strip()]
-    if lines:
-        selected = random.choice(lines)
-        text_box.tag_remove("highlight", "1.0", tk.END)
-        for i, line in enumerate(lines, start=1):
-            if line == selected:
-                text_box.tag_add("highlight", f"{i}.0", f"{i}.end")
-                root.after(60000, lambda: text_box.tag_remove("highlight", "1.0", tk.END))  # Remove highlight after 1 minute
-                break
+        label.pack(pady=5)
 
-# Function to save data to a user-selected file
+# Show Fate Chart (always upright)
+def show_fate_chart():
+    if not os.path.exists(FATE_CHART_FILE):
+        result_label.config(text="FateChart.png not found in the application folder.")
+        return
+    show_cards([FATE_CHART_FILE], force_upright=True)
+
+# Save data from Game State window
 def save_data():
     file_path = filedialog.asksaveasfilename(defaultextension=".txt",
                                              filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")])
     if not file_path:
-        return  # User canceled
-
+        return
     with open(file_path, "w") as f:
         f.write("Threads List:\n" + threads_list.get("1.0", tk.END))
         f.write("Characters List:\n" + characters_list.get("1.0", tk.END))
         f.write("Chaos Factor:\n" + str(chaos_slider.get()) + "\n")
         f.write("Storyline:\n" + storyline_box.get("1.0", tk.END))
 
-# Function to load data from a user-selected file
+# Load data into Game State window
 def load_data():
     file_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")])
     if not file_path:
-        return  # User canceled
-
+        return
     with open(file_path, "r") as f:
         data = f.read().split("\n")
 
@@ -133,29 +107,19 @@ def load_data():
         chaos_slider.set(int(data[chaos_index]))
         storyline_box.insert("1.0", "\n".join(data[storyline_index:]))
     except ValueError:
-        pass  # Handle cases where file format is incorrect
-        
-# Update the show_fate_chart function to pass force_upright=True
-def show_fate_chart():
-    if not os.path.exists(FATE_CHART_FILE):
-        result_label.config(text="FateChart.png not found in the application folder.")
-        return
-    
-    show_cards([FATE_CHART_FILE], force_upright=True)
-    
-last_folder = load_last_folder()
-card_images = load_images(last_folder) if last_folder else []
+        pass
 
-# GUI Setup
-root = tk.Tk()
-root.title("Card Dealer for Mythic Cards v4.2.1-beta")
-root.geometry("700x900")
+# New Game Function (Clears Game State Window)
+def new_game():
+    threads_list.delete("1.0", tk.END)
+    characters_list.delete("1.0", tk.END)
+    storyline_box.delete("1.0", tk.END)
+    chaos_slider.set(5)
 
-# Save and Load buttons
+# Main Game Window (Window 1) UI
 top_frame = tk.Frame(root)
 top_frame.pack()
 
-# Add "New" button next to Save and Load
 new_button = tk.Button(top_frame, text="New", command=new_game)
 new_button.pack(side=tk.LEFT, padx=5, pady=5)
 
@@ -168,29 +132,17 @@ load_button.pack(side=tk.LEFT, padx=5, pady=5)
 folder_button = tk.Button(root, text="Select Card Folder", command=select_folder)
 folder_button.pack(pady=5)
 
-result_label = tk.Label(root, text=f"Loaded {len(card_images)} cards from {last_folder}." if last_folder else "No folder selected.")
+result_label = tk.Label(root, text="No folder selected.")
 result_label.pack()
 
-# Horizontal Rule
-separator = tk.Frame(root, height=2, bd=1, relief="sunken", bg="black")
-separator.pack(fill="x", padx=5, pady=5)
-
-# Fate Chart Button
 tk.Button(root, text="Show Fate Chart", command=show_fate_chart).pack(pady=5)
 
-# Quick Draw Buttons
 tk.Label(root, text="Quickly Draw Cards").pack()
-
 quick_draw_frame = tk.Frame(root)
 quick_draw_frame.pack()
 for i in range(1, 11):
     tk.Button(quick_draw_frame, text=f"Draw {i}", command=lambda i=i: deal_cards(i)).pack(side=tk.LEFT, padx=5)
 
-# Horizontal Rule
-separator = tk.Frame(root, height=2, bd=1, relief="sunken", bg="black")
-separator.pack(fill="x", padx=5, pady=5)
-
-# You shouldn't need more than 10 cards ever, but here is an entry box just in case...
 tk.Label(root, text="Enter number of cards to deal:").pack()
 entry = tk.Entry(root)
 entry.pack()
@@ -198,12 +150,8 @@ entry.pack()
 deal_button = tk.Button(root, text="Deal Cards", command=deal_cards)
 deal_button.pack(pady=5)
 
-# Horizontal Rule
-separator = tk.Frame(root, height=2, bd=1, relief="sunken", bg="black")
-separator.pack(fill="x", padx=5, pady=5)
-
-# Scrollable Text Boxes and Chaos Factor
-text_frame = tk.Frame(root)
+# Game State Window (Window 2) UI
+text_frame = tk.Frame(game_state_window)
 text_frame.pack(pady=10)
 
 def create_scrollable_text(parent, label):
@@ -217,9 +165,21 @@ def create_scrollable_text(parent, label):
     frame.pack(side=tk.LEFT, padx=10)
     return text_box
 
+# Random selection function
+def select_random_entry(text_box):
+    lines = text_box.get("1.0", tk.END).strip().split("\n")
+    lines = [line for line in lines if line.strip()]
+    if lines:
+        selected = random.choice(lines)
+        text_box.tag_remove("highlight", "1.0", tk.END)
+        for i, line in enumerate(lines, start=1):
+            if line == selected:
+                text_box.tag_add("highlight", f"{i}.0", f"{i}.end")
+                game_state_window.after(60000, lambda: text_box.tag_remove("highlight", "1.0", tk.END))
+                break
+
 threads_list = create_scrollable_text(text_frame, "Threads List")
 
-# Chaos Factor Slider
 chaos_frame = tk.Frame(text_frame)
 tk.Label(chaos_frame, text="Chaos Factor").pack()
 chaos_slider = tk.Scale(chaos_frame, from_=9, to=1, orient=tk.VERTICAL)
@@ -228,9 +188,8 @@ chaos_frame.pack(side=tk.LEFT, padx=10)
 
 characters_list = create_scrollable_text(text_frame, "Characters List")
 
-# Storyline Box
-tk.Label(root, text="Storyline").pack()
-storyline_box = scrolledtext.ScrolledText(root, width=80, height=10, wrap=tk.WORD)
+tk.Label(game_state_window, text="Storyline").pack()
+storyline_box = scrolledtext.ScrolledText(game_state_window, width=80, height=10, wrap=tk.WORD)
 storyline_box.pack(pady=10)
 
 root.mainloop()
