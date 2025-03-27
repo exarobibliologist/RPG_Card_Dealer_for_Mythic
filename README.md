@@ -6,6 +6,7 @@
 
 # Beta Testing Version
 5.0.0-beta
+
 [If it breaks, please tell me where so I can find both pieces.](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/issues)
 
 # Support Always Appreciated
@@ -26,7 +27,11 @@ pip install pillow
 
 You will need to have a downloaded copy of Mythic Cards RPG game. In the download, there is a folder filled with "Individual Card Images" in the .png format.
 
-You won't need the Shuffle Card, since this program automatically shuffles the cards on every deal. You also will not need the backs of the cards. Select the card fronts, and copy them to a new folder. As of v4.0.0, there is no need to flip the cards yourself anymore. The program should flip the cards randomly during the draw.
+You won't need the Shuffle Card, since this program automatically shuffles the cards on every deal. You also will not need the backs of the cards. Select the card fronts, and copy them to a new folder.
+
+As of v4+, there is no need to flip the cards yourself anymore. The program should flip the cards randomly during the draw.
+
+As of v5+, app displays in two windows, suitable for small resolution laptop screens.
 
 # Tutorial
 ![Picture of Program](https://i.imgur.com/hn6ZHWX.png)
