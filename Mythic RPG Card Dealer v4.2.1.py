@@ -1,7 +1,7 @@
 import os
 import random
 import tkinter as tk
-from tkinter import filedialog, scrolledtext, Canvas, Scrollbar
+from tkinter import filedialog, scrolledtext, Canvas, Scrollbar, filedialog
 from PIL import Image, ImageTk
 
 # Get the script directory
@@ -9,6 +9,13 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 SAVE_FILE = os.path.join(SCRIPT_DIR, "last_folder.txt")  # File to store the last used folder
 DATA_FILE = os.path.join(SCRIPT_DIR, "saved_data.txt")  # File to store text box contents
 FATE_CHART_FILE = os.path.join(SCRIPT_DIR, "FateChart.png")  # Path to FateChart.png
+
+# Function to clear all text boxes and reset the Chaos Factor slider
+def new_game():
+    threads_list.delete("1.0", tk.END)
+    characters_list.delete("1.0", tk.END)
+    storyline_box.delete("1.0", tk.END)
+    chaos_slider.set(5)  # Reset Chaos Factor to default (middle value)
 
 # Load the last used folder path
 def load_last_folder():
@@ -56,17 +63,21 @@ def deal_cards(num_cards=None):
     selected_cards = card_images[:num_cards]
     show_cards(selected_cards)
 
-# Display cards in a new window
-def show_cards(selected_cards):
+def show_cards(selected_cards, force_upright=False):
     card_window = tk.Toplevel(root)
     card_window.title("Dealt Cards")
-    
+
     num_cards = len(selected_cards)
     columns = 5 if num_cards > 5 else num_cards
     rows = (num_cards // 5) + (1 if num_cards % 5 else 0)
-    
+
     for idx, card in enumerate(selected_cards):
         img = Image.open(card).resize((250, 350))
+        
+        # Randomly rotate only if force_upright is False
+        if not force_upright and random.choice([True, False]):
+            img = img.rotate(180)
+        
         photo = ImageTk.PhotoImage(img)
         label = tk.Label(card_window, image=photo)
         label.image = photo
@@ -85,56 +96,68 @@ def select_random_entry(text_box):
                 root.after(60000, lambda: text_box.tag_remove("highlight", "1.0", tk.END))  # Remove highlight after 1 minute
                 break
 
-# Function to save data to a file
+# Function to save data to a user-selected file
 def save_data():
-    with open(DATA_FILE, "w") as f:
+    file_path = filedialog.asksaveasfilename(defaultextension=".txt",
+                                             filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")])
+    if not file_path:
+        return  # User canceled
+
+    with open(file_path, "w") as f:
         f.write("Threads List:\n" + threads_list.get("1.0", tk.END))
         f.write("Characters List:\n" + characters_list.get("1.0", tk.END))
         f.write("Chaos Factor:\n" + str(chaos_slider.get()) + "\n")
         f.write("Storyline:\n" + storyline_box.get("1.0", tk.END))
 
-# Function to load data from a file
+# Function to load data from a user-selected file
 def load_data():
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, "r") as f:
-            data = f.read().split("\n")
-            
-        try:
-            threads_list.delete("1.0", tk.END)
-            characters_list.delete("1.0", tk.END)
-            storyline_box.delete("1.0", tk.END)
-            
-            threads_index = data.index("Threads List:") + 1
-            characters_index = data.index("Characters List:") + 1
-            chaos_index = data.index("Chaos Factor:") + 1
-            storyline_index = data.index("Storyline:") + 1
-            
-            threads_list.insert("1.0", "\n".join(data[threads_index:characters_index-1]))
-            characters_list.insert("1.0", "\n".join(data[characters_index:chaos_index-1]))
-            chaos_slider.set(int(data[chaos_index]))
-            storyline_box.insert("1.0", "\n".join(data[storyline_index:]))
-        except ValueError:
-            pass
+    file_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")])
+    if not file_path:
+        return  # User canceled
 
-# # Function to show the Fate Chart
+    with open(file_path, "r") as f:
+        data = f.read().split("\n")
+
+    try:
+        threads_list.delete("1.0", tk.END)
+        characters_list.delete("1.0", tk.END)
+        storyline_box.delete("1.0", tk.END)
+
+        threads_index = data.index("Threads List:") + 1
+        characters_index = data.index("Characters List:") + 1
+        chaos_index = data.index("Chaos Factor:") + 1
+        storyline_index = data.index("Storyline:") + 1
+
+        threads_list.insert("1.0", "\n".join(data[threads_index:characters_index-1]))
+        characters_list.insert("1.0", "\n".join(data[characters_index:chaos_index-1]))
+        chaos_slider.set(int(data[chaos_index]))
+        storyline_box.insert("1.0", "\n".join(data[storyline_index:]))
+    except ValueError:
+        pass  # Handle cases where file format is incorrect
+        
+# Update the show_fate_chart function to pass force_upright=True
 def show_fate_chart():
     if not os.path.exists(FATE_CHART_FILE):
         result_label.config(text="FateChart.png not found in the application folder.")
         return
     
-    show_cards([FATE_CHART_FILE])
-
+    show_cards([FATE_CHART_FILE], force_upright=True)
+    
 last_folder = load_last_folder()
 card_images = load_images(last_folder) if last_folder else []
 
 # GUI Setup
 root = tk.Tk()
-root.title("RPG Card Dealer")
+root.title("Card Dealer for Mythic Cards v4.2.1-beta")
 root.geometry("700x900")
 
 # Save and Load buttons
 top_frame = tk.Frame(root)
 top_frame.pack()
+
+# Add "New" button next to Save and Load
+new_button = tk.Button(top_frame, text="New", command=new_game)
+new_button.pack(side=tk.LEFT, padx=5, pady=5)
 
 save_button = tk.Button(top_frame, text="Save", command=save_data)
 save_button.pack(side=tk.LEFT, padx=5, pady=5)
