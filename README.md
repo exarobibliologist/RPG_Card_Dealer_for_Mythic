@@ -4,11 +4,10 @@
 
 ### This is a Python program for dealing Mythic Cards in singleplayer, or local multiplayer
 
-# Current Version
-4.2.1
+# Beta Testing Version
+5.0.0-beta
 
-# Beta Version
-5.0.0
+[If it breaks, please tell me where so I can find both pieces.](https://github.com/exarobibliologist/RPG_Card_Dealer_for_Mythic/issues)
 
 # Support Always Appreciated
 <a href="https://www.buymeacoffee.com/exarobibliologist" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
@@ -28,26 +27,26 @@ pip install pillow
 
 You will need to have a downloaded copy of Mythic Cards RPG game. In the download, there is a folder filled with "Individual Card Images" in the .png format.
 
-You won't need the Shuffle Card since this program automatically shuffles the cards on every deal, or the backs of the cards. Make a folder with just the card front images. As of v4, there is no need to pre-flip the images.
+You won't need the Shuffle Card, since this program automatically shuffles the cards on every deal. You also will not need the backs of the cards. Select the card fronts, and copy them to a new folder.
+
+As of v4+, there is no need to flip the cards yourself anymore. The program should flip the cards randomly during the draw.
+
+As of v5+, app displays in two windows, suitable for small resolution laptop screens.
 
 # Tutorial
-![Picture of Program](https://i.imgur.com/FaYDpoF.png)
+![Picture of Program](https://i.imgur.com/hn6ZHWX.png)
 
 Run the Python program.
 
-At the top of the window, there are three buttons (New, Save Load).
+At the top of the window, click "New" to begin a new game; click "Save" to save a current game; click "Load" to load your last saved game.
 
-New will clear all of the text boxes, and reset the Chaos Factor slider for a new game.
+"Select Card Folder" allows you to choose the folder where you have saved your deck of Mythic Cards. The program will display which folder is loaded, and how many card images it located in the folder. This folder will be saved when you exit the program and will reload automatically the next time you open it.
 
-Save will save all the information currently written in the program (Threads List, Chaos Factor, Characters List, and Storyline) to a save file that you can load later, or archive to show off your game. Multiple saves are possible, and you can save the file wherever you like.
+You can click "Show Fate Chart" to load the image titled FateChart.png which needs to be contained in the same folder as the Mythic RPG Card Dealer.py program.
 
-Load can load those savefiles and restore an old game back to be played again.
+The Quickly Draw Cards row of buttons allows you to quickly deal up any number of cards up to 10.
 
-The button Select Card Folder is used to load your digital deck of Mythic Cards. The program will display which folder is loaded, and how many .png images it located in the folder. This folder will be saved when you exit the program and will reload automatically the next time you open it.
-
-Load Fate Chart will load the image titled FateChart.png which needs to be contained in the same folder as the Mythic RPG Card Dealer.py program.
-
-You can use the Quickly Draw Cards buttons to quickly deal up to 10 cards. Alternatively, you can enter the number of cards you need dealt, and click the "Deal Cards" button below.
+If you need to deal more than 10, type the number in the box below and click "Deal Cards".
 
 The Threads List is where you can write the list of threads your game has. Some of the cards will require you to build on one of those threads, and the "Select Random Threads List" will randomly pick one of your open threads and highlight it.
 
@@ -57,8 +56,10 @@ The Chaos Factor is a slider that goes from 1 to 9
 
 In the Storyline box, you can write all the details of your emerging Mythic game storyline. Don't worry about filling any of the boxes with too much information; all the boxes can be scrolled with the mouse wheel.
 
-# Known Bugs
-None reported in v4.2.1
+The Save button at the top of the window will save all the information currently written in the program (Threads List, Chaos Factor, Characters List, and Storyline) to a "saved_data.txt" file in the directory where you have the Mythic RPG Card Dealer.py program stored.
 
-# Plans For The Future
-* Support for laptops with low resolution screens.
+When you reopen the program, it will start out blank, but you can click Load to reload your save file and continue your game. You can only have one save file in the program directory at a time. Multiple saves not supported yet.
+
+Here's an example of the program in use from a recent game I played.
+
+![](https://i.imgur.com/ye1NQoA.png)
