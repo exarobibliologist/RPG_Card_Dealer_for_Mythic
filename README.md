@@ -13,32 +13,16 @@
 <a href="https://www.buymeacoffee.com/exarobibliologist" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 # To Use
-You will need Python with Pip installed on your computer.
-
-If you use Windows 11, it is easier to install Python from the Microsoft store.
-[Python - Windows Store](https://apps.microsoft.com/detail/9nrwmjp3717k?hl=en-US&gl=US)
-
-For other operating systems (Mac, Linux)
-[Download from python.org](https://www.python.org/downloads/)
-
-Open your Terminal after Python is installed and type
-
-```
-pip install pillow
-```
+Download the .exe. Click to open the program.
 
 You will need to have a downloaded copy of Mythic Cards RPG game. In the download, there is a folder filled with "Individual Card Images" in the .png format.
 
-You won't need the Shuffle Card, since this program automatically shuffles the cards on every deal. You also will not need the backs of the cards. Select the card fronts, and copy them to a new folder.
-
-As of v4+, there is no need to flip the cards yourself anymore. The program should flip the cards randomly during the draw.
-
-As of v5+, app displays in two windows, suitable for small resolution laptop screens.
-
 # Tutorial
-![Picture of Program](https://i.imgur.com/PQTQvpg.png)
+Open the program. You will see two windows.
 
-Run the Python program. You will see two windows.
+![Picture of Program](https://i.imgur.com/pnwxQHA.png)
+
+![Picture of Program](https://i.imgur.com/JaluqRs.png)
 
 ### Window 1 - Mythic RPG Card Dealer
 
@@ -49,6 +33,12 @@ You can click "Show Fate Chart" to load the image titled FateChart.png which nee
 The Quickly Draw Cards row of buttons allows you to quickly deal up any number of cards up to 10.
 
 If you need to deal more than 10, type the number in the box below and click "Deal Cards".
+
+There is no need to flip the cards yourself anymore. The program should flip the cards randomly during the draw.
+
+You also won't need the Shuffle Card, as this program randomly chooses cards from the entire deck (so the cards are always shuffled)
+
+![Picture of Program](https://i.imgur.com/iILVyYs.png)
 
 ### Window 2 - Mythic Game Notes
 
