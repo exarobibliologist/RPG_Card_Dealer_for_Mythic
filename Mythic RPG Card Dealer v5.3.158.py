@@ -1,12 +1,13 @@
 import os
 import random
+import sys
 import tkinter as tk
 from tkinter import filedialog, scrolledtext
 from PIL import Image, ImageTk
 
 # Window Initialization
 root = tk.Tk()
-root.title("Mythic RPG Card Dealer v5.3.156")
+root.title("Mythic RPG Card Dealer v5.3.158")
 root.geometry("700x250")
 
 game_state_window = tk.Toplevel(root)
@@ -23,7 +24,13 @@ game_state_window.after(1000, lower_game_state)
 game_state_window.protocol("WM_DELETE_WINDOW", lambda: None)
 
 # Paths and Save Logic
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+if getattr(sys, 'frozen', False):
+    # If the application is run as a bundle (compiled .exe)
+    SCRIPT_DIR = os.path.dirname(sys.executable)
+else:
+    # If the application is run as a live .py script
+    SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 FATE_CHART_FILE = os.path.join(SCRIPT_DIR, "FateChart.png")
 CONFIG_FILE = os.path.join(SCRIPT_DIR, "config.txt")
 
